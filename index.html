@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>빙수 커스텀 하우스 | Custom Bingsu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 기본 스타일 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #fcfaf7; /* 부드러운 오프화이트 */
+            color: #4a3b32; /* 깊은 우드톤의 다크 브라운 */
+            overflow-x: hidden;
+        }
+
+        /* 내비게이션 바 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(252, 250, 247, 0.9);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid #e8dec9;
+        }
+
+        .logo {
+            font-family: 'Sansita Swashed', cursive;
+            font-size: 24px;
+            font-weight: bold;
+            color: #8c6239;
+            text-decoration: none;
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #5c4433;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #c68a4c;
+        }
+
+        /* 공통 섹션 스타일 */
+        section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        /* 1. 메인 홈 섹션 (우드톤 무드) */
+        #home {
+            background: linear-gradient(rgba(42, 30, 22, 0.6), rgba(42, 30, 22, 0.4)), 
+                        url('https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1937&auto=format&fit=crop') no-repeat center/cover;
+            /* 배경 이미지는 커피/우드 감성의 오픈소스 이미지입니다. 추후 빙수 매장 사진으로 대체 가능합니다. */
+            color: #fff;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            background-color: #8c6239;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .cta-btn:hover {
+            background-color: #a07143;
+            transform: translateY(-2px);
+        }
+
+        /* 2. 콘셉트 소개 섹션 */
+        #concept {
+            background-color: #f7f1e5; /* 밝은 베이지 우드 */
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #5c4433;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #8c6239;
+            margin: 15px auto 0;
+        }
+
+        .concept-description {
+            max-width: 700px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #6b5344;
+            margin-bottom: 40px;
+        }
+
+        /* 3. 커스텀 단계 섹션 (서브웨이 스타일) */
+        #step {
+            background-color: #ebdcb9; /* 따뜻한 모래/나무톤 */
+        }
+
+        .step-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: #fcfaf7;
+            padding: 30px;
+            border-radius: 10px;
+            width: 280px;
+            box-shadow: 0 10px 20px rgba(92, 68, 51, 0.1);
+            border: 1px solid #d4c39e;
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            font-family: 'Sansita Swashed', cursive;
+            font-size: 2rem;
+            color: #c68a4c;
+            margin-bottom: 10px;
+        }
+
+        .step-card h3 {
+            font-size: 1.3rem;
+            color: #4a3b32;
+            margin-bottom: 15px;
+        }
+
+        .step-card p {
+            font-size: 0.95rem;
+            color: #7a6555;
+            line-height: 1.6;
+        }
+
+        /* 4. 매장 안내 / 하단 섹션 */
+        #visit {
+            background-color: #362921; /* 진한 에스프레소 우드톤 */
+            color: #fcfaf7;
+        }
+
+        #visit .section-title {
+            color: #fcfaf7;
+        }
+
+        .info-box {
+            margin-top: 30px;
+            line-height: 2;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            margin-top: 60px;
+            font-size: 0.85rem;
+            color: #a89485;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#home" class="logo">Bingsu Custom.</a>
+        <nav>
+            <a href="#concept">Concept</a>
+            <a href="#step">Step</a>
+            <a href="#visit">Visit Us</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>나만의 빙수를 조립하다</h1>
+        <p>얼음 베이스부터 토핑, 드리즐까지 당신의 취향대로 완성하는 커스텀 빙수 바</p>
+        <a href="#concept" class="cta-btn">브랜드 스토리 보기</a>
+    </section>
+
+    <section id="concept">
+        <h2 class="section-title">Subway, But Bingsu!</h2>
+        <p class="concept-description">
+            정해진 레시피는 지루하니까. 이제 빙수도 당신이 고르는 대로 만들어집니다.<br>
+            따뜻한 우드톤 인테리어 안에서, 눈앞에 펼쳐지는 신선하고 달콤한 재료들을 직접 조합해보세요.<br>
+            세상에 단 하나뿐인 당신만의 오리지널 빙수가 탄생하는 순간입니다.
+        </p>
+    </section>
+
+    <section id="step">
+        <h2 class="section-title">How To Order</h2>
+        <div class="step-container">
+            
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>Ice Base</h3>
+                <p>순백의 고소한 우유 눈꽃 얼음이 소복하게 담긴 그릇에서 출발합니다.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>Red Bean</h3>
+                <p>가장 기본적이면서도 깊은 맛을 내는 달콤한 팥 고명을 원하는 만큼 올립니다.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>Powder & Crunch</h3>
+                <p>고소한 인절미 가루와 바삭한 콘푸러스트 가루를 뿌려 식감과 풍미를 더합니다.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <h3>Topping & Drizzle</h3>
+                <p> 쫀득한 떡 고명을 얹은 뒤, 진한 초코 드리즐 소스를 뿌려 나만의 빙수를 완성합니다.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="visit">
+        <h2 class="section-title">Visit Our Bar</h2>
+        <div class="info-box">
+            <p><strong>주소:</strong> 서울시 감성구 우드 브라운로 123 (빙수 커스텀 하우스)</p>
+            <p><strong>운영 시간:</strong> 매일 11:00 - 22:00</p>
+            <p><strong>인스타그램:</strong> @bingsu_custom_house</p>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Bingsu Custom House. All rights reserved.</p>
+        </footer>
+    </section>
+
+</body>
+</html>
